@@ -5,7 +5,7 @@ TUESDAY_DISCOUNT = 0.5
 APP_DISCOUNT = 0.25
 DISPLAY_TEXT_PIZZA = "How many pizzas ordered? "
 
-def get_pizza_count(display_text):
+def get_pizza_count(display_text = DISPLAY_TEXT_PIZZA):
     """ 
     Prompts the user to enter the number of pizzas ordered.
     
@@ -95,7 +95,7 @@ def main():
     print("\nBPP Pizza Price Calculator")
     print("="*40)
 
-    pizza_count = get_pizza_count("How many pizzas ordered? ")
+    pizza_count = get_pizza_count()
 
     is_delivery = get_yes_no_input("Is delivery required? (Y/N) ")
 
