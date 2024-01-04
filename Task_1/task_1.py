@@ -18,7 +18,18 @@ def get_yes_no_input(display_text):
             print("Please input 'Y' or 'N'.")
 
 def calculate_total_price(pizza_count, is_delivery, is_tuesday, used_app ):
-    pass
+    total_cost = pizza_count * 12
+
+    if is_tuesday.upper() == "Y":
+        total_cost *= 0.5
+
+    if is_delivery.upper() == "Y" and pizza_count < 5:
+        total_cost *= 2.5
+
+    if used_app.upper() == "Y":
+        total_cost -= (total_cost * 0.25)
+
+    return total_cost
 
 
 
@@ -39,10 +50,10 @@ def main():
     used_app = get_yes_no_input("Did the Customer use the app? (Y/N) ")
     print(used_app)
 
-    # total_price = calculate_total_price(pizza_count, is_delivery, is_tuesday, used_app)
-    # print("=====================================")
-    # print(f"Total Price: £{total_price:.2f}")
-    # print("=====================================")
+    total_price = calculate_total_price(pizza_count, is_delivery, is_tuesday, used_app)
+    print("=====================================")
+    print(f"Total Price: £{total_price:.2f}")
+    print("=====================================")
 
 if __name__ == "__main__":
     main()
