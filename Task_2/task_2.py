@@ -50,16 +50,16 @@ def display_results(count_our_cat, count_their_cat, total_time_stayed, longest_v
     - longest_visit_time (int): Duration of the longest visit.
     - shortest_visit_time (int): Duration of the shortest visit.
     """    
-    box_width = 45
-    print("=" * (box_width + 3))
-    print(f"|{'Log File Analysis':^{box_width + 1}}|")
-    print("=" * (box_width + 3))
+    BOX_WIDTH = 45
+    print("=" * (BOX_WIDTH + 3))
+    print(f"|{'Log File Analysis':^{BOX_WIDTH + 1}}|")
+    print("=" * (BOX_WIDTH + 3))
     print(f"|{'Cat Visits:':<25}{count_our_cat:<21}|")
     print(f"|{'Other Cats:':<25}{count_their_cat:<21}|")
 
-    print("=" * (box_width + 3))
+    print("=" * (BOX_WIDTH + 3))
     print(f"|{'Total Time in House:':<25}{total_time_stayed // 60} Hours, {total_time_stayed % 60:<2} {'Minutes':<9}|")
-    print("=" * (box_width + 3))
+    print("=" * (BOX_WIDTH + 3))
 
     # Display average visit length only if OUR cat visits
     if count_our_cat > 0:
@@ -69,7 +69,7 @@ def display_results(count_our_cat, count_their_cat, total_time_stayed, longest_v
 
     print(f"|{'Longest Visit Time:':<25}{longest_visit_time:} Minutes{'|':>12}")
     print(f"|{'Shortest Visit Time:':<25}{shortest_visit_time:<2} Minutes{'|':>12}")
-    print("=" * (box_width + 3))
+    print("=" * (BOX_WIDTH + 3))
 
 def main():
     """
