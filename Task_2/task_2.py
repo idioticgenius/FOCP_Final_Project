@@ -6,6 +6,22 @@ average_visit_time = 0
 longest_visit_time = 0
 shortest_visit_time = float('inf')
 
+def display_results(count_our_cat, count_their_cat, total_time_stayed, longest_visit_time, shortest_visit_time):
+        print("Log File Analysis")
+        print("="*20)
+        print(f"\nCat Visits: {count_our_cat}")
+        print(f"Other Cats: {count_their_cat}")
+        print(f"\nTotal Time in House: {total_time_stayed//60} Hours, {total_time_stayed%60} Minutes")
+        
+        if count_our_cat > 0:
+            print(f"\nAverage Visit Length: {total_time_stayed//count_our_cat} Minutes")
+        else:
+            print(f"\nAverage Visit Length: 0 Minutes")
+
+
+        print(f"Longest Visit: {longest_visit_time} Minutes")
+        print(f"Shortest Visit: {shortest_visit_time} Minutes")
+
 def main():
     global count_their_cat, count_our_cat, total_time_stayed, longest_visit_time, shortest_visit_time
     try:
@@ -25,14 +41,7 @@ def main():
                         longest_visit_time = time_stayed
                     if time_stayed < shortest_visit_time:
                         shortest_visit_time = time_stayed
-                
-
-        print(f"Cat Visits: {count_our_cat}")
-        print(f"Other Cats: {count_their_cat}")
-        print(f"Total Time in House: {total_time_stayed//60} Hours, {total_time_stayed%60} Minutes")
-        print(f"Average Visit Length: {total_time_stayed//count_our_cat} Minutes")
-        print(f"Longest Visit: {longest_visit_time} Minutes")
-        print(f"Shortest Visit: {shortest_visit_time} Minutes")
+        display_results(count_our_cat, count_their_cat, total_time_stayed, longest_visit_time, shortest_visit_time)
 
     except IndexError:
         print("Missing command line argument")
