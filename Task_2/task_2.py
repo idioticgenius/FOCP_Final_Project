@@ -1,7 +1,5 @@
 import sys
 
-
-
 def process_log(log_file):
     count_their_cat = 0
     count_our_cat = 0
@@ -26,20 +24,24 @@ def process_log(log_file):
     return count_our_cat, count_their_cat, total_time_stayed, longest_visit_time, shortest_visit_time
 
 def display_results(count_our_cat, count_their_cat, total_time_stayed, longest_visit_time, shortest_visit_time):
-        print("Log File Analysis")
-        print("="*20)
-        print(f"\nCat Visits: {count_our_cat}")
-        print(f"Other Cats: {count_their_cat}")
-        print(f"\nTotal Time in House(Our Cat): {total_time_stayed//60} Hours, {total_time_stayed%60} Minutes")
-        
-        if count_our_cat > 0:
-            print(f"\nAverage Visit Length: {total_time_stayed//count_our_cat} Minutes")
-        else:
-            print(f"\nAverage Visit Length: 0 Minutes")
+    box_width = 45
+    print("=" * (box_width + 3))
+    print(f"|{'Log File Analysis':^{box_width + 1}}|")
+    print("=" * (box_width + 3))
+    print(f"|{'Cat Visits:':<25}{count_our_cat:<21}|")
+    print(f"|{'Other Cats:':<25}{count_their_cat:<21}|")
 
+    print("=" * (box_width + 3))
+    print(f"|{'Total Time in House:':<25}{total_time_stayed // 60} Hours, {total_time_stayed % 60:<2} {'Minutes':<9}|")
+    print("=" * (box_width + 3))
+    if count_our_cat > 0:
+        print(f"|{'Average Visit Length:':<25}{total_time_stayed // count_our_cat:<2} Minutes{'|':>12}")
+    else:
+        print(f"|{'Average Visit Length:':<25}{0:<3} Minutes|")
 
-        print(f"Longest Visit: {longest_visit_time} Minutes")
-        print(f"Shortest Visit: {shortest_visit_time} Minutes")
+    print(f"|{'Longest Visit Time:':<25}{longest_visit_time:} Minutes{'|':>12}")
+    print(f"|{'Shortest Visit Time:':<25}{shortest_visit_time:<2} Minutes{'|':>12}")
+    print("=" * (box_width + 3))
 
 def main():
     try:
