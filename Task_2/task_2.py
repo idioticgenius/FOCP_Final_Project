@@ -46,7 +46,7 @@ def display_results(count_our_cat, count_their_cat, total_time_stayed, longest_v
     Parameters:
     - count_our_cat (int): Count of visits by OUR cat.
     - count_their_cat (int): Count of visits from  THEIR cat.
-    - total_time_stayed (int): Total time spent by our cat in the house.
+    - total_time_stayed (int): Total time spent by our cat in the shelter.
     - longest_visit_time (int): Duration of the longest visit.
     - shortest_visit_time (int): Duration of the shortest visit.
     """    
