@@ -8,13 +8,13 @@ def process_log(log_file):
     - log_file (file): The file object containing the log data.
 
     Returns:
-    Dictionary: {
-        "count_our_cat": count_our_cat,
-        "count_their_cat": count_their_cat,
-        "total_time_stayed": total_time_stayed,
-        "longest_visit_time": longest_visit_time,
-        "shortest_visit_time": shortest_visit_time
-    }
+        Dictionary: {
+            "count_our_cat": count_our_cat,
+            "count_their_cat": count_their_cat,
+            "total_time_stayed": total_time_stayed,
+            "longest_visit_time": longest_visit_time,
+            "shortest_visit_time": shortest_visit_time
+        }
     """    
     count_their_cat = 0
     count_our_cat = 0
@@ -90,6 +90,7 @@ def main():
     try:
         log_file = sys.argv[1]
         with open(log_file, "r") as log_file:
+            # Process
             stats = process_log(log_file)
         display_results(stats)
 
