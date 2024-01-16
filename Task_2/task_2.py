@@ -8,7 +8,13 @@ def process_log(log_file):
     - log_file (file): The file object containing the log data.
 
     Returns:
-    Tuple: (count_our_cat, count_their_cat, total_time_stayed, longest_visit_time, shortest_visit_time)
+    Dictionary: {
+        "count_our_cat": count_our_cat,
+        "count_their_cat": count_their_cat,
+        "total_time_stayed": total_time_stayed,
+        "longest_visit_time": longest_visit_time,
+        "shortest_visit_time": shortest_visit_time
+    }
     """    
     count_their_cat = 0
     count_our_cat = 0
@@ -37,9 +43,15 @@ def process_log(log_file):
             longest_visit_time = max(longest_visit_time, time_stayed)
             shortest_visit_time = min(shortest_visit_time, time_stayed)
 
-    return count_our_cat, count_their_cat, total_time_stayed, longest_visit_time, shortest_visit_time
+    return {
+        "count_our_cat": count_our_cat,
+        "count_their_cat": count_their_cat,
+        "total_time_stayed": total_time_stayed,
+        "longest_visit_time": longest_visit_time,
+        "shortest_visit_time": shortest_visit_time
+    }
 
-def display_results(count_our_cat, count_their_cat, total_time_stayed, longest_visit_time, shortest_visit_time):
+def display_results(stats):
     """
     Display the results of the log file analysis.
 
@@ -54,21 +66,21 @@ def display_results(count_our_cat, count_their_cat, total_time_stayed, longest_v
     print("=" * (BOX_WIDTH + 3))
     print(f"|{'Log File Analysis':^{BOX_WIDTH + 1}}|")
     print("=" * (BOX_WIDTH + 3))
-    print(f"|{'Cat Visits:':<25}{count_our_cat:<21}|")
-    print(f"|{'Other Cats:':<25}{count_their_cat:<21}|")
+    print(f"|{'Cat Visits:':<25}{stats['count_our_cat']:<21}|")
+    print(f"|{'Other Cats:':<25}{stats['count_their_cat']:<21}|")
 
     print("=" * (BOX_WIDTH + 3))
-    print(f"|{'Total Time in House:':<25}{total_time_stayed // 60} Hours, {total_time_stayed % 60:<2} {'Minutes':<9}|")
+    print(f"|{'Total Time in House:':<25}{stats['total_time_stayed'] // 60} Hours, {stats['total_time_stayed'] % 60:<2} {'Minutes':<9}|")
     print("=" * (BOX_WIDTH + 3))
 
     # Display average visit length only if OUR cat visits
-    if count_our_cat > 0:
-        print(f"|{'Average Visit Length:':<25}{total_time_stayed // count_our_cat:<2} Minutes{'|':>12}")
+    if stats["count_our_cat"] > 0:
+        print(f"|{'Average Visit Length:':<25}{stats['total_time_stayed'] // stats['count_our_cat']:<2} Minutes{'|':>12}")
     else:
         print(f"|{'Average Visit Length:':<25}{0:<3} Minutes|")
 
-    print(f"|{'Longest Visit Time:':<25}{longest_visit_time:} Minutes{'|':>12}")
-    print(f"|{'Shortest Visit Time:':<25}{shortest_visit_time:<2} Minutes{'|':>12}")
+    print(f"|{'Longest Visit Time:':<25}{stats['longest_visit_time']:} Minutes{'|':>12}")
+    print(f"|{'Shortest Visit Time:':<25}{stats['shortest_visit_time']:<2} Minutes{'|':>12}")
     print("=" * (BOX_WIDTH + 3))
 
 def main():
@@ -78,9 +90,8 @@ def main():
     try:
         log_file = sys.argv[1]
         with open(log_file, "r") as log_file:
-            count_our_cat, count_their_cat, total_time_stayed, longest_visit_time, shortest_visit_time = process_log(log_file)
-
-        display_results(count_our_cat, count_their_cat, total_time_stayed, longest_visit_time, shortest_visit_time)
+            stats = process_log(log_file)
+        display_results(stats)
 
     except IndexError:
         print("Missing command line argument")
