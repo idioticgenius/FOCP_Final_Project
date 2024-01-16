@@ -15,7 +15,7 @@ def process_log(log_file):
     total_time_stayed = 0
     longest_visit_time = 0
     shortest_visit_time = float('inf')
-    
+     
     # Read all lines from the log file
     data = log_file.readlines()
     

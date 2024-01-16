@@ -81,7 +81,7 @@ def calculate_total_price(pizza_count, is_delivery, is_tuesday, used_app ):
 
     # Add delivery cost if required
     if is_delivery.upper() == "Y" and pizza_count < 5:
-        total_cost *= DELIVERY_COST
+        total_cost += DELIVERY_COST
 
     # Apply 25% BPP app discount
     if used_app.upper() == "Y":
