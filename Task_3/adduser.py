@@ -1,4 +1,5 @@
 import hashlib
+import getpass
 
 def hashing(new_password):
     # Create a new SHA256 hash objectnew
@@ -25,7 +26,7 @@ def add_user():
             print("Cannot add. Most likely username already exists.")
             return
         new_real_name = input("Enter real name: ")
-        new_password = input("Enter password: ")
+        new_password = getpass.getpass("Enter password: ")
         password_hash = hashing(new_password)
 
         userbase_dictionary[new_user] = [new_real_name, password_hash]

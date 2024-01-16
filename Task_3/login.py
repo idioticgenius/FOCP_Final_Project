@@ -1,4 +1,5 @@
 import hashlib
+import getpass
 
 PASSWORD_FILE = '/home/abhidan/Documents/British_college/FOCP/FOCP_Final_Project/Task_3/password.txt'
 
@@ -23,7 +24,7 @@ def main():
     print(userbase_dictionary)
     username = input("User: ")
     if username in userbase_dictionary:
-        password = input("Password: ")
+        password = getpass.getpass(prompt = "Password: ")
         password = hashing(password)
         if password == userbase_dictionary[username][1]:
             print("Access granted.")
