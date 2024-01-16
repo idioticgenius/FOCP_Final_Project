@@ -1,3 +1,17 @@
+import hashlib
+
+def hashing(new_password):
+    # Create a new SHA256 hash objectnew
+    hash_object = hashlib.sha256()
+
+    # Add data to it (bytes, not strings)
+    hash_object.update(new_password.encode())
+
+    # Get the hexadecimal representation of the hash
+    hex_dig = hash_object.hexdigest()
+    return hex_dig
+
+
 PASSWORD_FILE = '/home/abhidan/Documents/British_college/FOCP/FOCP_Final_Project/Task_3/password.txt'
 userbase_dictionary = {}
 def add_user():
@@ -12,9 +26,10 @@ def add_user():
             return
         new_real_name = input("Enter real name: ")
         new_password = input("Enter password: ")
+        password_hash = hashing(new_password)
 
-        userbase_dictionary[new_user] = [new_real_name, new_password]
-        userbase.write(f"{new_user}:{new_real_name}:{new_password}\n")
+        userbase_dictionary[new_user] = [new_real_name, password_hash]
+        userbase.write(f"{new_user}:{new_real_name}:{password_hash}\n")
 
 
 if __name__ == "__main__":
