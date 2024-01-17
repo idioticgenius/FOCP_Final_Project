@@ -1,6 +1,9 @@
 import hashlib
 import getpass
 
+PASSWORD_FILE = 'password.txt'
+
+ 
 def hashing(new_password):
     # Create a new SHA256 hash objectnew
     hash_object = hashlib.sha256()
@@ -13,9 +16,8 @@ def hashing(new_password):
     return hex_dig
 
 
-PASSWORD_FILE = '/home/abhidan/Documents/British_college/FOCP/FOCP_Final_Project/Task_3/password.txt'
-userbase_dictionary = {}
 def add_user():
+    userbase_dictionary = {}
     with open(PASSWORD_FILE, 'a+') as userbase:
         userbase.seek(0)
         for user in userbase:

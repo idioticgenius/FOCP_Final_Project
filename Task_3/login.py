@@ -1,7 +1,7 @@
 import hashlib
 import getpass
 
-PASSWORD_FILE = '/home/abhidan/Documents/British_college/FOCP/FOCP_Final_Project/Task_3/password.txt'
+PASSWORD_FILE = 'password.txt'
 
 def hashing(new_password):
     # Create a new SHA256 hash object
@@ -21,7 +21,7 @@ def main():
         for user in userbase:
             username, real_name, password = user.strip().split(":")
             userbase_dictionary[username] = [real_name, password]
-    print(userbase_dictionary)
+    #print(userbase_dictionary)
     username = input("User: ")
     if username in userbase_dictionary:
         password = getpass.getpass(prompt = "Password: ")
