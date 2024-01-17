@@ -18,21 +18,26 @@ def hashing(new_password):
 
 def add_user():
     userbase_dictionary = {}
-    with open(PASSWORD_FILE, 'a+') as userbase:
+    with open(PASSWORD_FILE, 'r') as userbase:
         userbase.seek(0)
         for user in userbase:
             username, real_name, password = user.strip().split(":")
             userbase_dictionary[username] = [real_name, password]
-        new_user = input("Enter new username: ")
-        if new_user in userbase_dictionary:
-            print("Cannot add. Most likely username already exists.")
-            return
-        new_real_name = input("Enter real name: ")
-        new_password = getpass.getpass("Enter password: ")
-        password_hash = hashing(new_password)
+    new_user = input("Enter new username: ")
+    if new_user in userbase_dictionary:
+        print("Cannot add. Most likely username already exists.")
+        return
+    new_real_name = input("Enter real name: ")
+    new_password = getpass.getpass("Enter password: ")
+    password_hash = hashing(new_password)
+    userbase_dictionary[new_user] = [new_real_name, password_hash]
 
-        userbase_dictionary[new_user] = [new_real_name, password_hash]
-        userbase.write(f"{new_user}:{new_real_name}:{password_hash}\n")
+    with open(PASSWORD_FILE, "w") as userbase:
+        for username, (real_name, password_hash) in userbase_dictionary.items():
+            userbase.write(f"{username}:{real_name}:{password_hash}\n")
+
+    print(f"New user {new_user} added")
+
 
 
 if __name__ == "__main__":
