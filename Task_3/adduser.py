@@ -1,19 +1,7 @@
-import hashlib
 import getpass
+import passutils
 
 PASSWORD_FILE = 'password.txt'
-
- 
-def hashing(new_password):
-    # Create a new SHA256 hash objectnew
-    hash_object = hashlib.sha256()
-
-    # Add data to it (bytes, not strings)
-    hash_object.update(new_password.encode())
-
-    # Get the hexadecimal representation of the hash
-    hex_dig = hash_object.hexdigest()
-    return hex_dig
 
 
 def add_user():
@@ -28,9 +16,29 @@ def add_user():
         print("Cannot add. Most likely username already exists.")
         return
     new_real_name = input("Enter real name: ")
-    new_password = getpass.getpass("Enter password: ")
-    password_hash = hashing(new_password)
-    userbase_dictionary[new_user] = [new_real_name, password_hash]
+    print("Password should follow the following requirements")
+    print("At least one lowercase letter.")
+    print("At least one uppercase letter.")
+    print("At least one digit.")
+    print("At least one special character (e.g., @, #, $, etc.)")
+    print("Minimum length of 8 characters.")
+    while True:
+        new_password = getpass.getpass("Enter password: ")
+        if passutils.validate_password(new_password):
+            break
+    attempts = 0
+    while attempts < 3:
+        confirm_password = getpass.getpass("Confirm Password: ") 
+        if new_password == confirm_password:
+            password_hash = passutils.hashing(new_password)
+            userbase_dictionary[new_user] = [new_real_name, password_hash]
+            break
+        else:
+            attempts += 1
+            print("Password didnot match")
+    else:
+        print("Operation Failed")
+        return
 
     with open(PASSWORD_FILE, "w") as userbase:
         for username, (real_name, password_hash) in userbase_dictionary.items():

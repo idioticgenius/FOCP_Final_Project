@@ -1,18 +1,8 @@
-import hashlib
 import getpass
+import passutils
 
 PASSWORD_FILE = "password.txt"
 
-def hashing(new_password):
-    # Create a new SHA256 hash object
-    hash_object = hashlib.sha256()
-
-    # Add data to it (bytes, not strings)
-    hash_object.update(new_password.encode())
-
-    # Get the hexadecimal representation of the hash
-    hex_dig = hash_object.hexdigest()
-    return hex_dig
 
 def change_pass():
     userbase_dictionary = {}
@@ -25,9 +15,11 @@ def change_pass():
     if user not in userbase_dictionary:
         print("Username doesnot exist")
         return
-        
-    new_password = input("Enter new password: ")
-    new_pass_hash = hashing(new_password)
+    while True:
+        new_password = getpass.getpass("Enter password: ")
+        if passutils.validate_password(new_password):
+            break    
+    new_pass_hash = passutils.hashing(new_password)
 
     userbase_dictionary[user][1] = new_pass_hash
 
