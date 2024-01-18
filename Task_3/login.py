@@ -28,13 +28,16 @@ def login():
         return False
 
 def main():
-    if login():
+    #if login():
         while True:
-            print("Welcome to User Management System")
-            print("1. Add User")
-            print("2. Delete User")
-            print("3. Change Password")
-            print("4. Exit")
+            print("="*30)
+            print(f"| {'User Management System':<27}|")
+            print("="*30)
+            print(f"| {'1. Add User':<27}|")
+            print(f"| {'2. Delete User':<27}|")
+            print(f"| {'3. Change Password':<27}|")
+            print(f"| {'4. Exit':<27}|")
+            print("="*30)
 
             option = input("Enter your choice: ")
 
