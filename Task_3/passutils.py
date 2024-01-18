@@ -51,3 +51,13 @@ def confirm_password(password):
         else:
             print("Passwords did not match.")
     return False
+
+
+def authenticate_user(userbase, username, prompt = "Enter Password: "):
+    for i in range(3):
+        old_password = getpass.getpass(prompt)
+        if hashing(old_password) == userbase[username][1]:
+            return True
+        else:
+            print("Incorrect password.")
+    return False

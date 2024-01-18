@@ -5,14 +5,6 @@ import os
 
 PASSWORD_FILE = "password.txt"
 
-def verify_old_password(userbase, username):
-    for _ in range(3):
-        old_password = getpass.getpass("Enter Old Password: ")
-        if passutils.hashing(old_password) == userbase[username][1]:
-            return True
-        else:
-            print("Incorrect password.")
-    return False
 
 def change_pass():
     userbase_dictionary = {}
@@ -26,7 +18,7 @@ def change_pass():
         print("Username does not exist")
         return
 
-    if not verify_old_password(userbase_dictionary, username):
+    if not passutils.authenticate_user(userbase_dictionary, username, "Enter Old Password: "):
         print("Password verification failed.")
         return
 

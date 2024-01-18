@@ -10,8 +10,6 @@ def user_exists(username):
                 return True
     return False
 
-
-
 def add_user():
     new_user = input("Enter new username: ")
     if user_exists(new_user):
