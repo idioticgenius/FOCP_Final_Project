@@ -1,4 +1,5 @@
 import hashlib
+import getpass
 
 def hashing(new_password):
     # Create a new SHA256 hash object of the password
@@ -35,3 +36,18 @@ def validate_password(password):
         return False
 
     return True
+
+def get_valid_password():
+    while True:
+        new_password = getpass.getpass("Enter password: ")
+        if validate_password(new_password):
+            return new_password
+
+def confirm_password(password):
+    for i in range(3):
+        confirm_password = getpass.getpass("Confirm Password: ")
+        if password == confirm_password:
+            return True
+        else:
+            print("Passwords did not match.")
+    return False
