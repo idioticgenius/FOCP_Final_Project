@@ -1,7 +1,6 @@
 import getpass
 import passutils
-import tempfile
-import os
+
 
 PASSWORD_FILE = "password.txt"
 
@@ -35,13 +34,10 @@ def del_user():
         print("User deletion cancelled.")
         return
 
-    # Write to a temporary file and then replace the original file
-    temp_file_descriptor, temp_file_path = tempfile.mkstemp()
-    with os.fdopen(temp_file_descriptor, 'w') as temp_file:
+    with open(PASSWORD_FILE, "w") as userbase:
         for username, (real_name, password_hash) in userbase_dictionary.items():
-            temp_file.write(f"{username}:{real_name}:{password_hash}\n")
-    
-    os.replace(temp_file_path, PASSWORD_FILE)
+            userbase.write(f"{username}:{real_name}:{password_hash}\n")
+
 
 if __name__ == '__main__':
     del_user()

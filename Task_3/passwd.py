@@ -30,13 +30,10 @@ def change_pass():
     new_pass_hash = passutils.hashing(new_password)
     userbase_dictionary[username][1] = new_pass_hash
 
-    # Write to a temporary file and then replace the original file
-    temp_file_descriptor, temp_file_path = tempfile.mkstemp()
-    with os.fdopen(temp_file_descriptor, 'w') as temp_file:
+    with open(PASSWORD_FILE, 'w') as userbase:
         for username, (real_name, password_hash) in userbase_dictionary.items():
-            temp_file.write(f"{username}:{real_name}:{password_hash}\n")
+            userbase.write(f"{username}:{real_name}:{password_hash}\n")
     
-    os.replace(temp_file_path, PASSWORD_FILE)
     print("Password change successful")
 
 if __name__ == '__main__':
