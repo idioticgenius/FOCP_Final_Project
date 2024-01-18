@@ -17,12 +17,15 @@ def add_user():
         return
     
     new_real_name = input("Enter real name: ")
+
+    print("*"*55)
     print("Password should follow the following requirements")
     print("At least one lowercase letter.")
     print("At least one uppercase letter.")
     print("At least one digit.")
     print("At least one special character (e.g., @, #, $, etc.)")
     print("Password should be between 8 to 16 characters. ")
+    print("*"*55)
 
     new_password = passutils.get_valid_password()
     if not passutils.confirm_password(new_password):
