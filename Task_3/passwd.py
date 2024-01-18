@@ -1,33 +1,51 @@
 import getpass
 import passutils
+import tempfile
+import os
 
 PASSWORD_FILE = "password.txt"
 
+def verify_old_password(userbase, username):
+    for _ in range(3):
+        old_password = getpass.getpass("Enter Old Password: ")
+        if passutils.hashing(old_password) == userbase[username][1]:
+            return True
+        else:
+            print("Incorrect password.")
+    return False
 
 def change_pass():
     userbase_dictionary = {}
-    with open(PASSWORD_FILE,"r") as userbase:
-        #userbase.seek(0)
+    with open(PASSWORD_FILE, "r") as userbase:
         for user in userbase:
             username, real_name, password_hash = user.strip().split(":")
             userbase_dictionary[username] = [real_name, password_hash]
-    user = input("Enter new username: ")    
-    if user not in userbase_dictionary:
-        print("Username doesnot exist")
+
+    username = input("Enter username: ")
+    if username not in userbase_dictionary:
+        print("Username does not exist")
         return
-    while True:
-        new_password = getpass.getpass("Enter password: ")
-        if passutils.validate_password(new_password):
-            break    
+
+    if not verify_old_password(userbase_dictionary, username):
+        print("Password verification failed.")
+        return
+
+    new_password = passutils.get_valid_password("Enter New Password: ")
+    if not passutils.confirm_password(new_password):
+        print("Operation Failed: Password confirmation failed.")
+        return
+
     new_pass_hash = passutils.hashing(new_password)
+    userbase_dictionary[username][1] = new_pass_hash
 
-    userbase_dictionary[user][1] = new_pass_hash
-
-    with open(PASSWORD_FILE, "w") as userbase:
+    # Write to a temporary file and then replace the original file
+    temp_file_descriptor, temp_file_path = tempfile.mkstemp()
+    with os.fdopen(temp_file_descriptor, 'w') as temp_file:
         for username, (real_name, password_hash) in userbase_dictionary.items():
-            userbase.write(f"{username}:{real_name}:{password_hash}\n")
+            temp_file.write(f"{username}:{real_name}:{password_hash}\n")
+    
+    os.replace(temp_file_path, PASSWORD_FILE)
     print("Password change successful")
-
 
 if __name__ == '__main__':
     change_pass()

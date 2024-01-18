@@ -37,9 +37,9 @@ def validate_password(password):
 
     return True
 
-def get_valid_password():
+def get_valid_password(prompt = "Enter password: "):
     while True:
-        new_password = getpass.getpass("Enter password: ")
+        new_password = getpass.getpass(prompt)
         if validate_password(new_password):
             return new_password
 
