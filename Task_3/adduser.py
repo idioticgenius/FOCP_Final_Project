@@ -26,10 +26,9 @@ def add_user():
     """
     while True:
         new_user = input("Enter new username: ")
-        
-        # Validate that username is not completely numeric
-        if new_user.isdigit():
-            print("Username cannot be only numbers. Please try again.")
+        # Validate that username is not purely numeric
+        if not new_user or new_user.isdigit():
+            print("Username cannot be empty or only numbers. Please try again.")
             continue
 
         # Check if the username already exists
@@ -39,11 +38,7 @@ def add_user():
 
         break
     
-    # Check if the username already exists
-    if user_exists(new_user):
-        print("Cannot add. Most likely username already exists.")
-        return
-    
+   
     new_real_name = input("Enter real name: ")
     
     # Display password requirements
