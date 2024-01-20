@@ -8,7 +8,6 @@ def list_user():
     """
     print("\nList of Users")
     print("=" * len("List of Users"))
-    userbase_dictionary = {}
     with open(PASSWORD_FILE, "r") as userbase:
         for user in userbase:
             if user.strip(): #Check if line is not empty
