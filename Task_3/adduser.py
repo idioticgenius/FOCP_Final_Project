@@ -24,7 +24,20 @@ def add_user():
     The function prompts for a new username, real name, and password,
     then adds the new user with hashed password to the userbase file.
     """
-    new_user = input("Enter new username: ")
+    while True:
+        new_user = input("Enter new username: ")
+        
+        # Validate that username is not purely numeric
+        if new_user.isdigit():
+            print("Username cannot be only numbers. Please try again.")
+            continue
+
+        # Check if the username already exists
+        if user_exists(new_user):
+            print("Cannot add. Most likely username already exists.")
+            continue
+
+        break
     
     # Check if the username already exists
     if user_exists(new_user):
