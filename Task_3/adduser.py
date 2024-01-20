@@ -27,7 +27,7 @@ def add_user():
     while True:
         new_user = input("Enter new username: ")
         
-        # Validate that username is not purely numeric
+        # Validate that username is not completely numeric
         if new_user.isdigit():
             print("Username cannot be only numbers. Please try again.")
             continue
