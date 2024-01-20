@@ -2,6 +2,7 @@ import passutils
 import deluser
 import adduser
 import passwd
+import listuser
 
 PASSWORD_FILE = 'password.txt'
 
@@ -53,7 +54,8 @@ def main():
             print(f"| {'1. Add User':<27}|")
             print(f"| {'2. Delete User':<27}|")
             print(f"| {'3. Change Password':<27}|")
-            print(f"| {'4. Exit':<27}|")
+            print(f"| {'4. List Users':<27}|")
+            print(f"| {'5. Exit':<27}|")
             print("="*30)
 
             option = input("Enter your choice: ")
@@ -65,6 +67,8 @@ def main():
             elif option == '3':
                 passwd.change_pass()
             elif option == '4':
+                listuser.list_user()
+            elif option == '5':
                 break
             else:
                 print("Invalid option")
