@@ -25,7 +25,7 @@ def validate_password(password):
     Returns:
     bool: True if the password meets the criteria, False otherwise.
     """
-    if len(password) < 8 or len(password) > 16:
+    if len(password) < 8:
         print("Password must be at least 8 characters long.")
         return False
 
@@ -98,7 +98,7 @@ def authenticate_user(userbase, username, prompt = "Enter Password: "):
     Returns:
     bool: True if authentication is successful, False otherwise.
     """
-    
+
     for i in range(3):
         old_password = getpass.getpass(prompt)
         if hashing(old_password) == userbase[username][1]:
