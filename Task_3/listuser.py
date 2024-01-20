@@ -16,7 +16,5 @@ def list_user():
                 print(f"Username: {username}, Real Name: {real_name}")
 
 
-
-
 if __name__ == '__main__':
     list_user()
