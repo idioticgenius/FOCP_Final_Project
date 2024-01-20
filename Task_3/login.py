@@ -22,8 +22,9 @@ def login():
     with open(PASSWORD_FILE, 'a+') as userbase:
         userbase.seek(0)
         for user in userbase:
-            username, real_name, password = user.strip().split(":")
-            userbase_dictionary[username] = [real_name, password]
+            if user.strip(): # Check if line is not empty
+                username, real_name, password = user.strip().split(":")
+                userbase_dictionary[username] = [real_name, password]
     
     # Prompt for user credentials and authenticate
     username = input("User: ")

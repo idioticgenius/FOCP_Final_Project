@@ -11,8 +11,9 @@ def list_user():
     userbase_dictionary = {}
     with open(PASSWORD_FILE, "r") as userbase:
         for user in userbase:
-            username, real_name, password_hash = user.strip().split(":")
-            print(f"Username: {username}, Real Name: {real_name}")
+            if user.strip(): #Check if line is not empty
+                username, real_name, password_hash = user.strip().split(":")
+                print(f"Username: {username}, Real Name: {real_name}")
 
 
 

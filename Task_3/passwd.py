@@ -12,8 +12,9 @@ def change_pass():
     userbase_dictionary = {}
     with open(PASSWORD_FILE, "r") as userbase:
         for user in userbase:
-            username, real_name, password_hash = user.strip().split(":")
-            userbase_dictionary[username] = [real_name, password_hash]
+            if user.strip():
+                username, real_name, password_hash = user.strip().split(":")
+                userbase_dictionary[username] = [real_name, password_hash]
 
     username = input("Enter username: ")
     
